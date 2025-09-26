@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Catalogue avec Authentification</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+    <header>
+        <h1>Mon Catalogue</h1>
+        <button id="themeToggle">Mode Nuit</button>
+    </header>
+
+    <main>
+        <div id="login">
+            <h2>Connexion</h2>
+            <form id="loginForm">
+                <label for="email">Email :</label><br />
+                <input type="email" id="email" required placeholder="exemple@domaine.com" /><br />
+                <label for="password">Mot de passe :</label><br />
+                <input type="password" id="password" required placeholder="Votre mot de passe" /><br />
+                <button type="submit">Se connecter</button>
+            </form>
+            <div class="error" id="errorMessage"></div>
+        </div>
+
+        <div id="catalogue">
+            <h2>Catalogue des produits</h2>
+            <ul class="catalogue-list">
+                <li>Produit 1 - Description du produit 1</li>
+                <li>Produit 2 - Description du produit 2</li>
+                <li>Produit 3 - Description du produit 3</li>
+                <li>Produit 4 - Description du produit 4</li>
+            </ul>
+        </div>
+
+        <button id="logout">Se déconnecter</button>
+    </main>
+
+    <footer>
+        <p>© 2025 Mon Catalogue. Tous droits réservés.</p>
+    </footer>
+
+    <script>
+        const loginForm = document.getElementById('loginForm');
+        const emailInput = document.getElementById('email');
+        const passwordInput = document.getElementById('password');
+        const errorMessage = document.getElementById('errorMessage');
+        const loginDiv = document.getElementById('login');
+        const catalogueDiv = document.getElementById('catalogue');
+        const logoutBtn = document.getElementById('logout');
+        const themeToggleBtn = document.getElementById('themeToggle');
+
+        // Utilisateurs autorisés (exemple simple)
+        const users = {
+            "user@example.com": "motdepasse123",
+            "admin@exemple.com": "admin2025"
+        };
+
+        function showCatalogue() {
+            loginDiv.style.display = 'none';
+            catalogueDiv.style.display = 'block';
+            logoutBtn.style.display = 'inline-block';
+        }
+
+        function showLogin() {
+            loginDiv.style.display = 'block';
+            catalogueDiv.style.display = 'none';
+            logoutBtn.style.display = 'none';
+            errorMessage.textContent = '';
+            loginForm.reset();
+        }
+
+        // Gestion thème jour/nuit
+        function setTheme(theme) {
+            if (theme === 'nuit') {
+                document.body.classList.add('night');
+                themeToggleBtn.textContent = 'Mode Jour';
+            } else {
+                document.body.classList.remove('night');
+                themeToggleBtn.textContent = 'Mode Nuit';
+            }
+            localStorage.setItem('theme', theme);
+        }
+
+        // Initialiser thème depuis localStorage ou défaut jour
+        const savedTheme = localStorage.getItem('theme') || 'jour';
+        setTheme(savedTheme);
+
+        themeToggleBtn.addEventListener('click', () => {
+            const currentTheme = document.body.classList.contains('night') ? 'nuit' : 'jour';
+            setTheme(currentTheme === 'jour' ? 'nuit' : 'jour');
+        });
+
+        // Vérifier si utilisateur déjà connecté
+        if (localStorage.getItem('loggedInUser')) {
+            showCatalogue();
+        } else {
+            showLogin();
+        }
+
+        loginForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = emailInput.value.trim();
+            const password = passwordInput.value;
+
+            if (users[email] && users[email] === password) {
+                localStorage.setItem('loggedInUser', email);
+                showCatalogue();
+            } else {
+                errorMessage.textContent = "Email ou mot de passe incorrect.";
+            }
+        });
+
+        logoutBtn.addEventListener('click', function() {
+            localStorage.removeItem('loggedInUser');
+            showLogin();
+        });
+    </script>
+</body>
+</html>
