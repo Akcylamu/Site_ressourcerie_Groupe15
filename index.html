@@ -5,217 +5,196 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Ressourcerie éco-responsable - Donnez une seconde vie aux objets. Réparation, réemploi et économie circulaire.">
     <title>Ressourcerie Éco-Responsable</title>
-    
+
     <!-- Security Headers -->
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self';">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta http-equiv="X-Frame-Options" content="DENY">
-    
+
     <!-- SEO & Performance -->
     <link rel="preload" href="#" as="font" type="font/woff2" crossorigin>
     <meta name="theme-color" content="#2d5a27">
-    
+
     <!-- Stylesheet -->
     <link rel="stylesheet" href="styles/style.css">
 </head>
 <body>
-    
     <!-- Skip to content link for screen readers -->
     <a href="#main" class="skip-link">Aller au contenu principal</a>
-    
+
     <!-- Header with navigation -->
     <header role="banner">
         <nav role="navigation" aria-label="Navigation principale">
             <a href="#" class="logo" aria-label="Accueil - Ressourcerie Éco-Responsable">
-    <img src="image/la maison durable.svg" alt="Logo Ressourcerie Éco-Responsable" width="150">
-</a>
+                <img src="image/la maison durable.svg" alt="Logo Ressourcerie Éco-Responsable" class="logo-img">
+            </a>
 
-            
             <button class="menu-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Menu de navigation">
                 ☰
             </button>
-            
+
             <ul class="nav-menu" id="nav-menu">
                 <li><a href="#services">Services</a></li>
                 <li><a href="#impact">Impact</a></li>
                 <li><a href="#contact">Contact</a></li>
                 <li><a href="#don">Faire un don</a></li>
             </ul>
+
+            <div class="nav-auth">
+                <a href="auth-user.html">Espace utilisateur</a>
+                <a href="admin-login.html">Admin</a>
+            </div>
         </nav>
     </header>
-    
-    <!-- Main content -->
+
     <main id="main" role="main">
         <!-- Hero section -->
         <section class="hero fade-in" aria-labelledby="hero-title">
             <h1 id="hero-title">Donnez une seconde vie aux objets</h1>
             <p>
-                Découvrez notre ressourcerie éco-responsable où réparation, réemploi et économie circulaire 
+                Découvrez notre ressourcerie éco-responsable où réparation, réemploi et économie circulaire
                 se rencontrent pour un avenir plus durable.
             </p>
             <a href="#services" class="cta-button">Découvrir nos services</a>
         </section>
-        
+
         <!-- Services section -->
         <section id="services" class="services" aria-labelledby="services-title">
             <h2 id="services-title">Nos Services</h2>
-            
             <div class="services-grid">
                 <article class="service-card fade-in">
                     <div class="service-icon" aria-hidden="true">♻️</div>
                     <h3>Collecte & Tri</h3>
-                    <p>
-                        Nous récupérons vos objets inutilisés et les trions selon leur potentiel de réemploi. 
-                        Service gratuit à domicile sur rendez-vous.
-                    </p>
+                    <p>Nous récupérons vos objets inutilisés et les trions selon leur potentiel de réemploi. Service gratuit à domicile sur rendez-vous.</p>
                 </article>
-                
                 <article class="service-card fade-in">
                     <div class="service-icon" aria-hidden="true">🔧</div>
                     <h3>Réparation</h3>
-                    <p>
-                        Notre atelier de réparation redonne vie aux objets endommagés. 
-                        Électroménager, mobilier, vélos : nous réparons tout !
-                    </p>
+                    <p>Notre atelier de réparation redonne vie aux objets endommagés. Électroménager, mobilier, vélos : nous réparons tout !</p>
                 </article>
-                
                 <article class="service-card fade-in">
                     <div class="service-icon" aria-hidden="true">🛍️</div>
                     <h3>Boutique Solidaire</h3>
-                    <p>
-                        Trouvez des objets de seconde main à prix solidaires. 
-                        Chaque achat soutient l'économie circulaire locale.
-                    </p>
+                    <p>Trouvez des objets de seconde main à prix solidaires. Chaque achat soutient l'économie circulaire locale.</p>
                 </article>
-                
                 <article class="service-card fade-in">
                     <div class="service-icon" aria-hidden="true">📚</div>
                     <h3>Ateliers</h3>
-                    <p>
-                        Participez à nos ateliers de sensibilisation au réemploi et apprenez 
-                        les gestes éco-responsables du quotidien.
-                    </p>
+                    <p>Participez à nos ateliers de sensibilisation au réemploi et apprenez les gestes éco-responsables du quotidien.</p>
                 </article>
             </div>
         </section>
-        
+
         <!-- Impact section -->
         <section id="impact" class="impact" aria-labelledby="impact-title">
             <h2 id="impact-title">Notre Impact Environnemental</h2>
-            
             <div class="stats-grid">
                 <div class="stat-item">
                     <span class="stat-number" aria-label="1250">1,250</span>
                     <span class="stat-label">objets sauvés cette année</span>
                 </div>
-                
                 <div class="stat-item">
                     <span class="stat-number" aria-label="15 tonnes">15t</span>
                     <span class="stat-label">de déchets évités</span>
                 </div>
-                
                 <div class="stat-item">
                     <span class="stat-number" aria-label="89%">89%</span>
                     <span class="stat-label">taux de réemploi</span>
                 </div>
-                
                 <div class="stat-item">
                     <span class="stat-number" aria-label="450">450</span>
                     <span class="stat-label">familles aidées</span>
                 </div>
             </div>
         </section>
-        
+
         <!-- About section -->
         <section id="about" class="about" aria-labelledby="about-title">
             <div class="about-content">
                 <div class="about-text">
                     <h2 id="about-title">Notre Mission</h2>
-                    <p>
-                        Depuis 2018, notre ressourcerie s'engage quotidiennement pour réduire les déchets 
-                        et promouvoir l'économie circulaire. Nous croyons fermement qu'ensemble, nous pouvons 
-                        transformer notre rapport à la consommation.
-                    </p>
-                    <p>
-                        Notre équipe de bénévoles passionnés travaille chaque jour pour donner une seconde vie 
-                        aux objets, créer du lien social et sensibiliser à l'environnement.
-                    </p>
+                    <p>Depuis 2018, notre ressourcerie s'engage quotidiennement pour réduire les déchets et promouvoir l'économie circulaire.</p>
+                    <p>Notre équipe de bénévoles passionnés travaille chaque jour pour donner une seconde vie aux objets.</p>
                     <a href="#contact" class="cta-button secondary">Nous rejoindre</a>
                 </div>
                 <div class="about-image" aria-hidden="true">
-                    <div class="image-placeholder">
-                        🌍<br>
-                        <small>Image éco-responsable</small>
-                    </div>
+                    <div class="image-placeholder">🌍<br><small>Image éco-responsable</small></div>
                 </div>
             </div>
         </section>
-        
+
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <h2>Rejoignez-nous dès maintenant</h2>
+            <p>Que vous soyez donneur, bénéficiaire ou partenaire, il y a une place pour vous dans notre communauté.</p>
+            <div class="cta-grid">
+                <div class="cta-card">
+                    <h3>🔄 Donneur</h3>
+                    <p>Donnez une seconde vie à vos objets et soutenez l'économie circulaire.</p>
+                    <a href="auth-user.html" class="cta-button secondary">S'inscrire</a>
+                </div>
+                <div class="cta-card">
+                    <h3>🤝 Bénéficiaire</h3>
+                    <p>Accédez à des objets de qualité à prix solidaire.</p>
+                    <a href="auth-user.html" class="cta-button secondary">S'inscrire</a>
+                </div>
+                <div class="cta-card">
+                    <h3>👤 Admin</h3>
+                    <p>Espace réservé à l'équipe administrative.</p>
+                    <a href="admin-login.html" class="cta-button secondary">Se connecter</a>
+                </div>
+            </div>
+        </section>
+
         <!-- Newsletter section -->
         <section class="newsletter" aria-labelledby="newsletter-title">
             <h2 id="newsletter-title">Restez informé</h2>
             <p>Recevez nos actualités et conseils éco-responsables</p>
             <form class="newsletter-form" action="#" method="post" aria-label="Inscription à la newsletter">
                 <label for="email" class="visually-hidden">Votre adresse email</label>
-                <input 
-                    type="email" 
-                    id="email" 
-                    name="email" 
-                    placeholder="Votre adresse email" 
-                    required 
-                    aria-describedby="email-help"
-                >
+                <input type="email" id="email" name="email" placeholder="Votre adresse email" required aria-describedby="email-help">
                 <button type="submit" class="cta-button">S'inscrire</button>
             </form>
             <p id="email-help" class="form-help">Nous respectons votre vie privée. Désinscription possible à tout moment.</p>
         </section>
-        
+
         <!-- Contact section -->
         <section id="contact" class="contact" aria-labelledby="contact-title">
             <h2 id="contact-title">Nous Contacter</h2>
             <p>Une question ? Un don à faire ? N'hésitez pas à nous contacter !</p>
-            
             <div class="contact-info">
                 <div class="contact-item">
                     <h3>📍 Adresse</h3>
-                    <address>   
-                        adresse
-                    </address>
+                    <address>adresse</address>
                 </div>
-                
                 <div class="contact-item">
                     <h3>📞 Téléphone</h3>
-                    <p>
-                        <a href="tel:+33442123456">numéro</a>
-                    </p>
+                    <p><a href="tel:+33442123456">numéro</a></p>
                 </div>
-                
                 <div class="contact-item">
                     <h3>✉️ Email</h3>
-                    <p>
-                        <a href="mailto:contact@ressourcerie.fr">email</a>
-                    </p>
+                    <p><a href="mailto:contact@ressourcerie.fr">email</a></p>
                 </div>
-                
                 <div class="contact-item">
                     <h3>🕒 Horaires</h3>
-                    <p>
-                        Mar-Sam : 9h-18h<br>
-                        Fermé dimanche et lundi
-                    </p>
+                    <p>Mar-Sam : 9h-18h<br>Fermé dimanche et lundi</p>
                 </div>
             </div>
         </section>
     </main>
-    
+
     <!-- Footer -->
     <footer role="contentinfo">
         <div class="footer-content">
             <p>&copy; 2025 Ressourcerie Éco-Responsable. Tous droits réservés.</p>
             <div class="footer-links">
-                <a href="#mentions">Mentions légales</a> | 
-                <a href="#privacy">Confidentialité</a> | 
+                <a href="#mentions">Mentions légales</a> |
+                <a href="#privacy">Confidentialité</a> |
                 <a href="#cookies">Cookies</a>
+            </div>
+            <div class="footer-auth">
+                <a href="auth-user.html">Espace utilisateur</a> |
+                <a href="admin-login.html">Espace admin</a>
             </div>
             <div class="eco-badge">
                 <span aria-hidden="true">🌱</span>
@@ -223,81 +202,8 @@
             </div>
         </div>
     </footer>
-    
-    <!-- JavaScript for enhanced functionality -->
-    <script>
-        // Mobile menu toggle
-        document.addEventListener('DOMContentLoaded', function() {
-            const menuToggle = document.querySelector('.menu-toggle');
-            const navMenu = document.querySelector('.nav-menu');
-            
-            if (menuToggle && navMenu) {
-                menuToggle.addEventListener('click', function() {
-                    const isExpanded = this.getAttribute('aria-expanded') === 'true';
-                    this.setAttribute('aria-expanded', !isExpanded);
-                    navMenu.classList.toggle('active');
-                });
-            }
-            
-            // Smooth scrolling for internal links
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const target = document.querySelector(this.getAttribute('href'));
-                    if (target) {
-                        target.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-                    }
-                });
-            });
-            
-            // Intersection Observer for fade-in animations
-            if ('IntersectionObserver' in window) {
-                const observerOptions = {
-                    root: null,
-                    rootMargin: '0px 0px -100px 0px',
-                    threshold: 0.1
-                };
-                
-                const observer = new IntersectionObserver(function(entries) {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            entry.target.classList.add('fade-in');
-                            observer.unobserve(entry.target);
-                        }
-                    });
-                }, observerOptions);
-                
-                document.querySelectorAll('.service-card').forEach(card => {
-                    observer.observe(card);
-                });
-            }
-            
-            // Form validation and submission
-            const form = document.querySelector('.newsletter-form');
-            if (form) {
-                form.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    const email = this.querySelector('input[type="email"]').value;
-                    if (email) {
-                        // Simulate form submission
-                        alert('Merci pour votre inscription ! Vous recevrez bientôt nos actualités.');
-                        this.reset();
-                    }
-                });
-            }
-        });
-        
-        // Performance monitoring (for eco-design metrics)
-        if ('performance' in window) {
-            window.addEventListener('load', function() {
-                // Log performance metrics for monitoring
-                const perfData = performance.getEntriesByType('navigation')[0];
-                console.log('Page load time:', perfData.loadEventEnd - perfData.fetchStart, 'ms');
-            });
-        }
-    </script>
+
+    <!-- JavaScript -->
+    <script src="scripts/main.js"></script>
 </body>
 </html>

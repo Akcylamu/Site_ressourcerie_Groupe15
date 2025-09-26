@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscription/Connexion - Ressourcerie Éco-Responsable</title>
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+    <!-- Bouton Retour à l'accueil -->
+    <div class="back-home-container">
+        <a href="index.html" class="back-home-button">← Retour à l'accueil</a>
+    </div>
+
+    <div class="auth-container">
+        <div class="auth-tabs">
+            <button class="auth-tab active" data-target="inscription">Inscription</button>
+            <button class="auth-tab" data-target="connexion">Connexion</button>
+        </div>
+
+        <!-- Formulaire d'inscription -->
+        <form id="inscription" class="auth-form active" action="#" method="post">
+            <h2>Créer un compte</h2>
+            <p>Rejoignez-nous en tant que donneur ou bénéficiaire.</p>
+
+            <div class="form-group">
+                <label for="nom">Nom</label>
+                <input type="text" id="nom" name="nom" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Mot de passe</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+
+            <div class="form-group">
+                <label>Je m'inscris en tant que :</label>
+                <div class="checkbox-group">
+                    <div class="checkbox-item">
+                        <input type="radio" id="donneur" name="role" value="donneur" required>
+                        <label for="donneur">Donneur</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="radio" id="beneficiaire" name="role" value="beneficiaire">
+                        <label for="beneficiaire">Bénéficiaire</label>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="cta-button">S'inscrire</button>
+
+            <div class="login-link">
+                <p>Déjà un compte ? <a href="#" id="show-connexion">Connectez-vous ici</a></p>
+            </div>
+        </form>
+
+        <!-- Formulaire de connexion -->
+        <form id="connexion" class="auth-form" action="#" method="post">
+            <h2>Se connecter</h2>
+            <p>Accédez à votre espace donneur ou bénéficiaire.</p>
+
+            <div class="form-group">
+                <label for="login-email">Email</label>
+                <input type="email" id="login-email" name="email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="login-password">Mot de passe</label>
+                <input type="password" id="login-password" name="password" required>
+            </div>
+
+            <div class="form-group">
+                <label>Je me connecte en tant que :</label>
+                <div class="checkbox-group">
+                    <div class="checkbox-item">
+                        <input type="radio" id="login-donneur" name="role" value="donneur" required>
+                        <label for="login-donneur">Donneur</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="radio" id="login-beneficiaire" name="role" value="beneficiaire">
+                        <label for="login-beneficiaire">Bénéficiaire</label>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="cta-button">Se connecter</button>
+
+            <div class="login-link">
+                <p>Pas encore de compte ? <a href="#" id="show-inscription">Inscrivez-vous ici</a></p>
+            </div>
+        </form>
+    </div>
+
+    <script src="scripts/auth.js"></script>
+</body>
+</html>
