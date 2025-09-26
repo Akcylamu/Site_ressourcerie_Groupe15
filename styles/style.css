@@ -582,6 +582,15 @@ footer {
     animation: fadeInUp 0.8s ease-out forwards;
 }
 
+.logo-img {
+    height: 30px; 
+    width: 30px; /* Garde les proportions */
+    max-width: 30px; /* Limite la largeur maximale */
+    object-fit: contain; /* Évite la déformation */
+    display: block; /* Évite les espaces indésirables sous l'image */
+}
+
+
 /* ===== RESPONSIVE DESIGN ===== */
 @media (max-width: 768px) {
     .menu-toggle {
