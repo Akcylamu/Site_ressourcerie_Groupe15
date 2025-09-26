@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Catalogue de Meubles - Ressourcerie Éco-Responsable</title>
     <link rel="stylesheet" href="styles/style.css">
-    <link rel="stylesheet" href="styles/dashboard.css">
+    <link rel="stylesheet" href="styles/pages.css">
 </head>
-<body>
+<body class="dashboard-body">
     <!-- Bouton Retour à l'accueil -->
     <div class="back-home-container">
         <a href="index.html" class="back-home-button">← Retour à l'accueil</a>
@@ -18,12 +18,13 @@
         <div class="dashboard-header">
             <div>
                 <h1 class="dashboard-title">Catalogue de Meubles</h1>
-                <p class="user-greeting">Bonjour !</p>
+                <p class="user-greeting">Bonjour, <span id="user-name">Utilisateur</span> !</p>
             </div>
             <div>
-                <button id="add-meuble-button" class="cta-button" style="display: none;">
+                <button id="add-meuble-button" class="cta-button">
                     + Donner un meuble
                 </button>
+                <a href="index.html" class="logout-button">Déconnexion</a>
             </div>
         </div>
 
@@ -36,8 +37,8 @@
 
         <!-- Grille des meubles -->
         <div class="meubles-grid" id="meubles-grid">
-            <!-- Les meubles seront ajoutés dynamiquement ici -->
-            <div class="meuble-card">
+            <!-- Exemple de meuble 1 -->
+            <div class="meuble-card" data-id="meuble-1">
                 <div class="meuble-image">🪑</div>
                 <div class="meuble-info">
                     <h3 class="meuble-title">Table en bois</h3>
@@ -47,14 +48,15 @@
                         <span class="meuble-price">Gratuit</span>
                     </div>
                     <button class="reserve-button">Réserver</button>
-                    <div class="admin-actions" style="display: none;">
+                    <div class="admin-actions">
                         <button class="admin-button edit-button">Modifier</button>
                         <button class="admin-button delete-button">Supprimer</button>
                     </div>
                 </div>
             </div>
 
-            <div class="meuble-card">
+            <!-- Exemple de meuble 2 -->
+            <div class="meuble-card" data-id="meuble-2">
                 <div class="meuble-image">🛋️</div>
                 <div class="meuble-info">
                     <h3 class="meuble-title">Canapé 2 places</h3>
@@ -64,7 +66,7 @@
                         <span class="meuble-price">Gratuit</span>
                     </div>
                     <button class="reserve-button reserved" disabled>Réservé</button>
-                    <div class="admin-actions" style="display: none;">
+                    <div class="admin-actions">
                         <button class="admin-button edit-button">Modifier</button>
                         <button class="admin-button delete-button">Supprimer</button>
                     </div>
@@ -73,8 +75,8 @@
         </div>
     </div>
 
-    <!-- Modal pour ajouter/modifier un meuble (admin) -->
-    <div class="modal" id="meuble-modal">
+    <!-- Modal pour ajouter/modifier un meuble -->
+     <div class="modal" id="meuble-modal">
         <div class="modal-content">
             <button class="close-modal" id="close-modal">×</button>
             <h2 class="modal-title" id="modal-title">Ajouter un meuble</h2>
@@ -89,6 +91,10 @@
                     <textarea id="meuble-description-input" rows="3" required></textarea>
                 </div>
                 <div class="modal-form-group">
+                    <label for="meuble-price-input">Prix (laisser vide pour "Gratuit")</label>
+                    <input type="text" id="meuble-price-input" placeholder="Ex: 25 € ou Gratuit">
+                </div>
+                <div class="modal-form-group">
                     <label for="meuble-status-input">Statut</label>
                     <select id="meuble-status-input" required>
                         <option value="available">Disponible</option>
@@ -96,8 +102,8 @@
                     </select>
                 </div>
                 <div class="modal-form-group">
-                    <label for="meuble-image-input">Image (URL)</label>
-                    <input type="text" id="meuble-image-input" placeholder="https://exemple.com/image.jpg">
+                    <label for="meuble-image-input">Image (URL ou emoji)</label>
+                    <input type="text" id="meuble-image-input" placeholder="🪑 ou URL d'une image">
                 </div>
                 <div class="modal-actions">
                     <button type="button" class="cta-button secondary" id="cancel-modal">Annuler</button>

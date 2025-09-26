@@ -1,0 +1,23 @@
+{
+  "meubles": [
+    {
+      "id": "meuble-1",
+      "title": "Table en bois",
+      "description": "Table en bois massif...",
+      "price": "25 €",
+      "status": "available",
+      "image": "🪑"
+    },
+    {
+      "id": "meuble-2",
+      "title": "Canapé 2 places",
+      "description": "Canapé confortable...",
+      "price": "Gratuit",
+      "status": "reserved",
+      "image": "🛋️"
+    }
+  ],
+  "reservedMeubles": {
+    "meuble-2": true
+  }
+}
