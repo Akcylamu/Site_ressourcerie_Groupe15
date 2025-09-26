@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catalogue de Meubles - Ressourcerie Éco-Responsable</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/dashboard.css">
+</head>
+<body>
+    <!-- Bouton Retour à l'accueil -->
+    <div class="back-home-container">
+        <a href="index.html" class="back-home-button">← Retour à l'accueil</a>
+    </div>
+
+    <div class="dashboard-container">
+        <!-- En-tête du tableau de bord -->
+        <div class="dashboard-header">
+            <div>
+                <h1 class="dashboard-title">Catalogue de Meubles</h1>
+                <p class="user-greeting">Bonjour !</p>
+            </div>
+            <div>
+                <button id="add-meuble-button" class="cta-button" style="display: none;">
+                    + Donner un meuble
+                </button>
+            </div>
+        </div>
+
+        <!-- Filtres -->
+        <div class="filters">
+            <button class="filter-button active" data-filter="all">Tous</button>
+            <button class="filter-button" data-filter="available">Disponibles</button>
+            <button class="filter-button" data-filter="reserved">Réservés</button>
+        </div>
+
+        <!-- Grille des meubles -->
+        <div class="meubles-grid" id="meubles-grid">
+            <!-- Les meubles seront ajoutés dynamiquement ici -->
+            <div class="meuble-card">
+                <div class="meuble-image">🪑</div>
+                <div class="meuble-info">
+                    <h3 class="meuble-title">Table en bois</h3>
+                    <p class="meuble-description">Table en bois massif, légère usure, idéale pour 4 personnes.</p>
+                    <div class="meuble-meta">
+                        <span class="meuble-status available">Disponible</span>
+                        <span class="meuble-price">Gratuit</span>
+                    </div>
+                    <button class="reserve-button">Réserver</button>
+                    <div class="admin-actions" style="display: none;">
+                        <button class="admin-button edit-button">Modifier</button>
+                        <button class="admin-button delete-button">Supprimer</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="meuble-card">
+                <div class="meuble-image">🛋️</div>
+                <div class="meuble-info">
+                    <h3 class="meuble-title">Canapé 2 places</h3>
+                    <p class="meuble-description">Canapé confortable, tissu gris, bon état général.</p>
+                    <div class="meuble-meta">
+                        <span class="meuble-status reserved">Réservé</span>
+                        <span class="meuble-price">Gratuit</span>
+                    </div>
+                    <button class="reserve-button reserved" disabled>Réservé</button>
+                    <div class="admin-actions" style="display: none;">
+                        <button class="admin-button edit-button">Modifier</button>
+                        <button class="admin-button delete-button">Supprimer</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal pour ajouter/modifier un meuble (admin) -->
+    <div class="modal" id="meuble-modal">
+        <div class="modal-content">
+            <button class="close-modal" id="close-modal">×</button>
+            <h2 class="modal-title" id="modal-title">Ajouter un meuble</h2>
+            <form class="modal-form" id="meuble-form">
+                <input type="hidden" id="meuble-id">
+                <div class="modal-form-group">
+                    <label for="meuble-title-input">Titre</label>
+                    <input type="text" id="meuble-title-input" required>
+                </div>
+                <div class="modal-form-group">
+                    <label for="meuble-description-input">Description</label>
+                    <textarea id="meuble-description-input" rows="3" required></textarea>
+                </div>
+                <div class="modal-form-group">
+                    <label for="meuble-status-input">Statut</label>
+                    <select id="meuble-status-input" required>
+                        <option value="available">Disponible</option>
+                        <option value="reserved">Réservé</option>
+                    </select>
+                </div>
+                <div class="modal-form-group">
+                    <label for="meuble-image-input">Image (URL)</label>
+                    <input type="text" id="meuble-image-input" placeholder="https://exemple.com/image.jpg">
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="cta-button secondary" id="cancel-modal">Annuler</button>
+                    <button type="submit" class="cta-button" id="save-meuble">Enregistrer</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="scripts/dashboard.js"></script>
+</body>
+</html>

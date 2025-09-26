@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscription réussie - Ressourcerie Éco-Responsable</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <style>
+        /* Styles spécifiques pour cette page (identiques à auth_success.html) */
+        .success-container {
+            max-width: 600px;
+            margin: 50px auto;
+            text-align: center;
+            background: white;
+            padding: var(--spacing-xl);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+        .success-icon {
+            font-size: 4rem;
+            color: var(--color-success);
+            margin-bottom: var(--spacing-md);
+        }
+        .success-title {
+            color: var(--color-primary);
+            font-size: 2rem;
+            margin-bottom: var(--spacing-sm);
+        }
+        .success-message {
+            color: var(--color-text-light);
+            margin-bottom: var(--spacing-lg);
+            line-height: 1.6;
+        }
+        .success-actions {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-sm);
+            margin-top: var(--spacing-md);
+        }
+        .success-actions .cta-button {
+            width: 100%;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <!-- Bouton Retour à l'accueil -->
+    <div class="back-home-container">
+        <a href="index.html" class="back-home-button">← Retour à l'accueil</a>
+    </div>
+
+    <div class="success-container">
+        <div class="success-icon">🎉</div>
+        <h1 class="success-title">Inscription réussie !</h1>
+        <p class="success-message">
+            Votre compte a été créé avec succès. Vous pouvez maintenant vous connecter
+            pour accéder à votre espace personnel et commencer à donner ou bénéficier
+            de nos services.
+        </p>
+
+        <div class="success-actions">
+            <a href="index.html" class="cta-button">Retour à l'accueil</a>
+            <a href="auth-user.html" class="cta-button secondary">Se connecter</a>
+        </div>
+    </div>
+</body>
+</html>

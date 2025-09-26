@@ -45,16 +45,21 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Gestion des formulaires (optionnel)
-    authForms.forEach(form => {
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const formData = new FormData(form);
-            const role = formData.get('role');
-            const email = formData.get('email');
-            const action = form.id === 'inscription' ? 'inscription' : 'connexion';
-            alert(`Formulaire ${action} soumis en tant que ${role} (email: ${email}).`);
-            form.reset();
-        });
+    // Gestion des formulaires (remplace la partie existante)
+authForms.forEach(form => {
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const formData = new FormData(form);
+        const role = formData.get('role');
+        const email = formData.get('email');
+        const action = form.id === 'inscription' ? 'inscription' : 'connexion';
+
+        // Redirection vers la page de succès
+        if (action === 'inscription') {
+            window.location.href = 'register_success.html';
+        } else {
+            window.location.href = 'auth_success.html';
+        }
+      });
     });
 });
