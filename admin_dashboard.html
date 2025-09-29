@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catalogue de Meubles - Ressourcerie Éco-Responsable</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <style>
+        /* Fond sombre pour le catalogue */
+        body.dashboard-body {
+            background-color: #2d3748; /* Fond bleu-gris foncé */
+            color: #e2e8f0; /* Texte clair */
+        }
+
+        .dashboard-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background-color: #4a5568; /* Gris foncé */
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 0.5rem;
+        }
+
+        .dashboard-title {
+            color: white;
+            font-size: 2rem;
+        }
+
+        .user-greeting {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.1rem;
+        }
+
+        .logout-button {
+            background: #e53e3e;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .filters {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-button {
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .filter-button.active {
+            background: #ecc94b;
+            color: #2d3748;
+            border-color: #ecc94b;
+        }
+
+        .meubles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .meuble-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: 0.3s;
+        }
+
+        .meuble-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+        }
+
+        .meuble-image {
+            width: 100%;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255,255,255,0.5);
+            font-size: 2rem;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .meuble-info {
+            padding: 0.5rem;
+            color: #e2e8f0;
+        }
+
+        .meuble-title {
+            font-size: 1.2rem;
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+
+        .meuble-description {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            line-height: 1.4;
+        }
+
+        .meuble-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .meuble-status {
+            font-size: 0.8rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 1rem;
+            font-weight: 600;
+        }
+
+        .meuble-status.available {
+            background: rgba(76, 175, 80, 0.3);
+            color: #48bb78;
+        }
+
+        .meuble-status.reserved {
+            background: rgba(255, 152, 0, 0.3);
+            color: #ed8936;
+        }
+
+        .meuble-price {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #ecc94b;
+        }
+
+        .reserve-button {
+            width: 100%;
+            padding: 0.5rem;
+            background: #ecc94b;
+            color: #2d3748;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-top: 0.25rem;
+            transition: 0.3s;
+        }
+
+        .reserve-button:hover:not(.reserved) {
+            background: #718096;
+        }
+
+        .reserve-button.reserved {
+            background: rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.5);
+            cursor: not-allowed;
+        }
+
+        .admin-actions {
+            display: flex; /* Toujours visible */
+            gap: 0.25rem;
+            margin-top: 0.25rem;
+        }
+
+        .admin-button {
+            flex: 1;
+            padding: 0.25rem;
+            font-size: 0.8rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .edit-button {
+            background: #4299e1;
+            color: white;
+        }
+
+        .delete-button {
+            background: #e53e3e;
+            color: white;
+        }
+
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: #4a5568;
+            padding: 1.5rem;
+            border-radius: 12px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            color: white;
+        }
+
+        .modal-title {
+            color: white;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .modal-form {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .modal-form-group label {
+            margin-bottom: 0.25rem;
+            font-weight: 600;
+            color: white;
+        }
+
+        .modal-form-group input,
+        .modal-form-group select,
+        .modal-form-group textarea {
+            padding: 0.25rem;
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 8px;
+            background: rgba(255,255,255,0.05);
+            color: white;
+        }
+
+        .modal-form-group input:focus,
+        .modal-form-group select:focus,
+        .modal-form-group textarea:focus {
+            outline: 2px solid #ecc94b;
+            border-color: #ecc94b;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .modal-actions button {
+            flex: 1;
+            padding: 0.5rem;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: rgba(255,255,255,0.5);
+        }
+
+        .back-home-container {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 10;
+        }
+
+        .back-home-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            background: rgba(255,255,255,0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+
+        .back-home-button:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateX(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+
+            .filters {
+                justify-content: center;
+            }
+
+            .meubles-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body class="dashboard-body">
+    <div class="back-home-container">
+        <a href="index.html" class="back-home-button">← Retour à l'accueil</a>
+    </div>
+
+    <div class="dashboard-container">
+        <div class="dashboard-header">
+            <div>
+                <h1 class="dashboard-title">Catalogue de Meubles</h1>
+                <p class="user-greeting">Bonjour, <span id="user-name">Utilisateur</span> !</p>
+            </div>
+            <div>
+                <button id="add-meuble-button" class="cta-button">+ Donner un meuble</button>
+                <a href="index.html" class="logout-button">Déconnexion</a>
+            </div>
+        </div>
+
+        <div class="filters">
+            <button class="filter-button active" data-filter="all">Tous</button>
+            <button class="filter-button" data-filter="available">Disponibles</button>
+            <button class="filter-button" data-filter="reserved">Réservés</button>
+        </div>
+
+        <div class="meubles-grid" id="meubles-grid">
+            <div class="meuble-card" data-id="meuble-1">
+                <div class="meuble-image">🪑</div>
+                <div class="meuble-info">
+                    <h3 class="meuble-title">Table en bois</h3>
+                    <p class="meuble-description">Table en bois massif, légère usure, idéale pour 4 personnes.</p>
+                    <div class="meuble-meta">
+                        <span class="meuble-status available">Disponible</span>
+                        <span class="meuble-price">25 €</span>
+                    </div>
+                    <button class="reserve-button">Réserver</button>
+                    <div class="admin-actions">
+                        <button class="admin-button edit-button">Modifier</button>
+                        <button class="admin-button delete-button">Supprimer</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="meuble-card" data-id="meuble-2">
+                <div class="meuble-image">🛋️</div>
+                <div class="meuble-info">
+                    <h3 class="meuble-title">Canapé 2 places</h3>
+                    <p class="meuble-description">Canapé confortable, tissu gris, bon état général.</p>
+                    <div class="meuble-meta">
+                        <span class="meuble-status reserved">Réservé</span>
+                        <span class="meuble-price">Gratuit</span>
+                    </div>
+                    <button class="reserve-button reserved" disabled>Réservé</button>
+                    <div class="admin-actions">
+                        <button class="admin-button edit-button">Modifier</button>
+                        <button class="admin-button delete-button">Supprimer</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="meuble-modal">
+        <div class="modal-content">
+            <button class="close-modal" id="close-modal">×</button>
+            <h2 class="modal-title" id="modal-title">Ajouter un meuble</h2>
+            <form class="modal-form" id="meuble-form">
+                <input type="hidden" id="meuble-id">
+                <div class="modal-form-group">
+                    <label for="meuble-title-input">Titre</label>
+                    <input type="text" id="meuble-title-input" required>
+                </div>
+                <div class="modal-form-group">
+                    <label for="meuble-description-input">Description</label>
+                    <textarea id="meuble-description-input" rows="3" required></textarea>
+                </div>
+                <div class="modal-form-group">
+                    <label for="meuble-price-input">Prix (laisser vide pour "Gratuit")</label>
+                    <input type="text" id="meuble-price-input" placeholder="Ex: 25 € ou Gratuit">
+                </div>
+                <div class="modal-form-group">
+                    <label for="meuble-status-input">Statut</label>
+                    <select id="meuble-status-input" required>
+                        <option value="available">Disponible</option>
+                        <option value="reserved">Réservé</option>
+                    </select>
+                </div>
+                <div class="modal-form-group">
+                    <label for="meuble-image-input">Image (URL ou emoji)</label>
+                    <input type="text" id="meuble-image-input" placeholder="🪑 ou URL d'une image">
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="cta-button secondary" id="cancel-modal">Annuler</button>
+                    <button type="submit" class="cta-button" id="save-meuble">Enregistrer</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+
+            // Gestion des filtres
+            document.querySelectorAll('.filter-button').forEach(button => {
+                button.addEventListener('click', () => {
+                    document.querySelectorAll('.filter-button').forEach(b => b.classList.remove('active'));
+                    button.classList.add('active');
+
+                    const filter = button.getAttribute('data-filter');
+                    document.querySelectorAll('.meuble-card').forEach(card => {
+                        if (filter === 'all' ||
+                            (filter === 'available' && card.querySelector('.meuble-status').classList.contains('available')) ||
+                            (filter === 'reserved' && card.querySelector('.meuble-status').classList.contains('reserved'))) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+
+            // Réserver un meuble
+            function reserveMeuble(button) {
+                const card = button.closest('.meuble-card');
+                const meubleId = card.getAttribute('data-id');
+                const status = card.querySelector('.meuble-status');
+
+                status.textContent = 'Réservé';
+                status.classList.remove('available');
+                status.classList.add('reserved');
+                button.textContent = 'Réservé';
+                button.classList.add('reserved');
+                button.disabled = true;
+
+                let reservedMeubles = JSON.parse(localStorage.getItem('reservedMeubles')) || {};
+                reservedMeubles[meubleId] = true;
+                localStorage.setItem('reservedMeubles', JSON.stringify(reservedMeubles));
+
+            }
+
+            document.querySelectorAll('.reserve-button:not(.reserved)').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    reserveMeuble(e.target);
+                });
+            });
+
+            // Charger les réservations depuis localStorage
+            const reservedMeubles = JSON.parse(localStorage.getItem('reservedMeubles')) || {};
+            Object.keys(reservedMeubles).forEach(id => {
+                const card = document.querySelector(`.meuble-card[data-id="${id}"]`);
+                if (card) {
+                    const btn = card.querySelector('.reserve-button');
+                    reserveMeuble(btn);
+                }
+            });
+
+            // Modal ajout/modif meuble
+            const modal = document.getElementById('meuble-modal');
+            const addButton = document.getElementById('add-meuble-button');
+            const closeModal = document.getElementById('close-modal');
+            const cancelModal = document.getElementById('cancel-modal');
+            const meubleForm = document.getElementById('meuble-form');
+
+            addButton.addEventListener('click', () => {
+                modal.classList.add('active');
+                document.getElementById('modal-title').textContent = 'Ajouter un meuble';
+                meubleForm.reset();
+                document.getElementById('meuble-id').value = '';
+            });
+
+            closeModal.addEventListener('click', () => modal.classList.remove('active'));
+            cancelModal.addEventListener('click', () => modal.classList.remove('active'));
+
+            function generateMeubleId() { return 'meuble-' + Date.now() + '-' + Math.floor(Math.random()*1000); }
+
+            meubleForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const meubleId = document.getElementById('meuble-id').value || generateMeubleId();
+                const title = document.getElementById('meuble-title-input').value;
+                const description = document.getElementById('meuble-description-input').value;
+                const price = document.getElementById('meuble-price-input').value || 'Gratuit';
+                const status = document.getElementById('meuble-status-input').value;
+                const image = document.getElementById('meuble-image-input').value || '🪑';
+
+                let card;
+                if (document.getElementById('meuble-id').value) {
+                    // Modification
+                    card = document.querySelector(`.meuble-card[data-id="${meubleId}"]`);
+                    card.querySelector('.meuble-title').textContent = title;
+                    card.querySelector('.meuble-description').textContent = description;
+                    card.querySelector('.meuble-price').textContent = price;
+                    const statusSpan = card.querySelector('.meuble-status');
+                    statusSpan.textContent = status==='available'?'Disponible':'Réservé';
+                    statusSpan.className = `meuble-status ${status}`;
+                    const imgDiv = card.querySelector('.meuble-image');
+                    imgDiv.textContent = image;
+                    alert(`Meuble "${title}" modifié avec succès !`);
+                } else {
+                    // Ajout
+                    card = document.createElement('div');
+                    card.className = 'meuble-card';
+                    card.setAttribute('data-id', meubleId);
+                    card.innerHTML = `
+                        <div class="meuble-image">${image}</div>
+                        <div class="meuble-info">
+                            <h3 class="meuble-title">${title}</h3>
+                            <p class="meuble-description">${description}</p>
+                            <div class="meuble-meta">
+                                <span class="meuble-status ${status}">${status==='available'?'Disponible':'Réservé'}</span>
+                                <span class="meuble-price">${price}</span>
+                            </div>
+                            <button class="reserve-button ${status==='reserved'?'reserved':''}" ${status==='reserved'?'disabled':''}>
+                                ${status==='reserved'?'Réservé':'Réserver'}
+                            </button>
+                            <div class="admin-actions">
+                                <button class="admin-button edit-button">Modifier</button>
+                                <button class="admin-button delete-button">Supprimer</button>
+                            </div>
+                        </div>
+                    `;
+                    document.getElementById('meubles-grid').prepend(card);
+
+                    if (status==='available') {
+                        card.querySelector('.reserve-button').addEventListener('click', e=>reserveMeuble(e.target));
+                    }
+                    card.querySelector('.edit-button').addEventListener('click', e=>editMeuble(e.target));
+                    card.querySelector('.delete-button').addEventListener('click', e=>deleteMeuble(e.target));
+
+                    alert(`Meuble "${title}" ajouté avec succès !`);
+                }
+
+                modal.classList.remove('active');
+                meubleForm.reset();
+            });
+
+            function editMeuble(button){
+                const card = button.closest('.meuble-card');
+                document.getElementById('modal-title').textContent = 'Modifier le meuble';
+                document.getElementById('meuble-id').value = card.getAttribute('data-id');
+                document.getElementById('meuble-title-input').value = card.querySelector('.meuble-title').textContent;
+                document.getElementById('meuble-description-input').value = card.querySelector('.meuble-description').textContent;
+                document.getElementById('meuble-price-input').value = card.querySelector('.meuble-price').textContent;
+                document.getElementById('meuble-status-input').value = card.querySelector('.meuble-status').classList.contains('available')?'available':'reserved';
+                document.getElementById('meuble-image-input').value = card.querySelector('.meuble-image').textContent;
+                modal.classList.add('active');
+            }
+
+            function deleteMeuble(button){
+                if(confirm('Voulez-vous vraiment supprimer ce meuble ?')){
+                    const card = button.closest('.meuble-card');
+                    const id = card.getAttribute('data-id');
+                    card.remove();
+                    let reserved = JSON.parse(localStorage.getItem('reservedMeubles')) || {};
+                    if(reserved[id]){ delete reserved[id]; localStorage.setItem('reservedMeubles', JSON.stringify(reserved)); }
+                    alert('Meuble supprimé avec succès !');
+                }
+            }
+
+            // Initialisation des boutons existants
+            document.querySelectorAll('.edit-button').forEach(btn => btn.addEventListener('click', e=>editMeuble(e.target)));
+            document.querySelectorAll('.delete-button').forEach(btn => btn.addEventListener('click', e=>deleteMeuble(e.target)));
+        });
+    </script>
+</body>
+</html>
