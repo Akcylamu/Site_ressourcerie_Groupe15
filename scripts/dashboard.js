@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
             meubleCard.className = 'meuble-card';
             meubleCard.setAttribute('data-id', meuble.id);
             meubleCard.innerHTML = `
-                <div class="meuble-image">${meuble.image}</div>
+                <div class="meuble-image"><img src="${meuble.image}" alt="image"></div>
                 <div class="meuble-info">
                     <h3 class="meuble-title">${meuble.title}</h3>
                     <p class="meuble-description">${meuble.description}</p>
