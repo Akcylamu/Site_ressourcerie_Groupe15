@@ -52,7 +52,7 @@ body {
     overflow-x: hidden;
 }
 img {
-    max-width: auto;
+    max-width: 100%;
     height: 100%;
     display: block;
 }
@@ -1052,4 +1052,5 @@ footer {
         grid-template-columns: 1fr;
     }
 }
+
 
